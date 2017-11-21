@@ -1,6 +1,6 @@
 // C++ program to find groups of unknown
 // Points using K nearest neighbour algorithm.
-#include "knn_functions.h"
+#include "KNNfunctions.h"
 
 
 bool comparison(Point a, Point b)
