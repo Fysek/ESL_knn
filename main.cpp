@@ -1,73 +1,27 @@
-// C++ program to find groups of unknown
-// Points using K nearest neighbour algorithm.
-#include <cmath>
-#include <iostream>
-#include <algorithm>
-using namespace std;
+#include "MNISTread.h"
+#include "knn_functions.h"
 
-struct Point
-{
-	int val;     // Group of point
-	double x, y;     // Co-ordinate of point
-	double distance; // Distance from test point
-};
-// Used to sort an array of points by increasing
-// order of distance
-bool comparison(Point a, Point b)
-{
-	return (a.distance < b.distance);
-}
-// This function finds classification of point p using
-// k nearest neighbour algorithm. It assumes only two
-// groups and returns 0 if p belongs to group 0, else
-// 1 (belongs to group 1).
-int classifyAPoint(Point arr[], int n, int k, Point p)
-{
-	// Fill distances of all points from p
-	for (int i = 0; i < n; i++)
-		arr[i].distance =
-		sqrt((arr[i].x - p.x) * (arr[i].x - p.x) + (arr[i].y - p.y) * (arr[i].y - p.y));
-
-	// Sort the Points by distance from p
-	sort(arr, arr + n, comparison);
-
-	// Now consider the first k elements and only
-	// two groups
-	int freq1 = 0;   // Frequency of group 0
-	int freq2 = 0;   // Frequency of group 1
-	for (int i = 0; i < k; i++)
-	{
-		if (arr[i].val == 0)
-			freq1++;
-		else if (arr[i].val == 1)
-			freq2++;
-	}
-
-	return (freq1 > freq2 ? 0 : 1);
-}
-// Driver code
 int main()
 {
-	const int n = 17; // Number of data points
-	Point arr[n];
+	std::string filename = "mnist/t10k-images-idx3-ubyte";
+	int number_of_images = 10000;
+	int image_size = 28 * 28;
 
-	arr[0].x = 1;
-	arr[0].y = 12;
-	arr[0].val = 0;
+	std::vector<std::vector<double> > vec1;
+	read_Mnist(filename, vec1);
+	std::cout << vec1.size() << std::endl;
+	std::cout << vec1[0].size() << std::endl;
 
-	///itd...
-	arr[16].x = 1;
-	arr[16].y = 7;
-	arr[16].val = 0;
 
-	/*Testing Point*/
-	Point p;
-	p.x = 2.5;
-	p.y = 7;
+	
+	//read MNIST label into double vector
+	std::string filename = "mnist/t10k-labels-idx1-ubyte";
+	int number_of_images = 10000;
 
-	// Parameter to decide groupr of the testing point
-	int k = 3;
-	printf("The value classified to unknown point"
-		" is %d.\n", classifyAPoint(arr, n, k, p));
+
+	std::vector<double> vec(number_of_images);
+	read_Mnist_Label(filename, vec);
+	std::cout << vec.size() << std::endl;
+
 	return 0;
 }
