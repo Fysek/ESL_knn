@@ -2,7 +2,7 @@
 
 Put your MNIST files to C:/   !!!
 <br>
-Hello, to do:<br>
+To do:<br>
 1.Read all files to std::vector. <br>
 2.Count the distance for every test image from train list.<br>
 3.Choose the k closest one neghbours and assign the label.<br>
