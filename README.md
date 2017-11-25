@@ -1,4 +1,6 @@
-# ESL_knn
+# ESL_knn<br>
+
+Put your MNIST files to C:/   !!!
 <br>
 Hello, to do:<br>
 1.Read all files to std::vector. <br>
