@@ -13,7 +13,7 @@ int ReverseInt(int i)
 	return ((int)c1 << 24) + ((int)c2 << 16) + ((int)c3 << 8) + c4;
 }
 
-std::vector<std::vector<double>> read_Mnist(std::string filename, std::vector<std::vector<double> > &vec)
+void read_Mnist_Image(std::string filename, std::vector<std::vector<double> > &vec)
 {
 	std::ifstream file(filename, std::ios::binary);
 	if (file.is_open())
@@ -49,12 +49,9 @@ std::vector<std::vector<double>> read_Mnist(std::string filename, std::vector<st
 	}
 	else
 		std::cout << "unable to open file" << std::endl;
-
-	return vec;
 }
 
-
-std::vector<double> read_Mnist_Label(std::string filename, std::vector<double> &vec)
+void read_Mnist_Label(std::string filename, std::vector<double> &vec)
 {
 	std::ifstream file (filename);
     if (file.is_open())
@@ -82,7 +79,6 @@ std::vector<double> read_Mnist_Label(std::string filename, std::vector<double> &
     }
 	else
 		std::cout << "unable to open file" << std::endl;
-	return vec;
 }
 
 
