@@ -11,6 +11,42 @@ bool comparison(Point a, Point b)
 // k nearest neighbour algorithm. It assumes only two
 // groups and returns 0 if p belongs to group 0, else
 // 1 (belongs to group 1).
+
+unsigned int classify_label(	
+	std::vector<unsigned int> &vec_label_train,
+	std::vector<std::vector <unsigned int>> &vec_dist,
+	int k
+	)
+{
+	unsigned int label;
+	int label_tab[k];
+	//wybierz najmniejszy dystans
+	//dwa wskazniki i wybieraja najmniejsze	
+	
+	std::vector<std::vector<unsigned int>>::iterator it1 = i->begin();
+	std::vector<std::vector<unsigned int>>::iterator it2 = i->begin();
+	it2++;
+	
+	for (std::vector<std::vector<unsigned int>>::iterator i = vec_dist.begin(); i!=vec_dist.end(); ++i ){
+		for (std::vector<std::vector<unsigned int>>::iterator j = i->begin(); j != i->end(); ++j ){
+			if(*it2==*it1)
+				it2++;
+			else if(it2 > it1)
+				
+		
+		//iteratory lataja po wektorze potem wybieraja najmniejszy
+			
+		
+	}
+	
+	
+	return label;
+}
+
+
+
+
+
 int classifyAPoint(Point arr[], int n, int k, Point p)
 {
 	// Fill distances of all points from p

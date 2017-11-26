@@ -44,8 +44,15 @@ std::vector <unsigned int> assign_label(
 	//assign the label using knn, vec contains assigned labels for 10k test images
 	std::vector <unsigned int> assigned_labels_vec;
 	read_Mnist_Label(filename_label_train, vec_label_train);
-	for (;;) {}
-
+	unsigned int temp;
+	//mam labele, mam dystanse
+	//k najblizszych sprawdzamy
+	//i przyporzdkowywujemy 
+	int k = 7;
+	for (int i = 0;i < 10000;i++) {
+		temp = classify_label(vec_dist,k);
+		assigned_labels_vec.push_back(temp);
+	}
 	return assigned_labels_vec;
 }
 
