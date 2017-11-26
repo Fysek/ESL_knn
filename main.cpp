@@ -2,8 +2,6 @@
 #include "MNISTread.h"
 #include "MNISTdatabase.h"
 #include "KNNfunctions.h"
-//wyswietlanie vectorow
-
 
 
 int main()

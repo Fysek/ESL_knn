@@ -13,7 +13,7 @@ int ReverseInt(int i)
 	return ((int)c1 << 24) + ((int)c2 << 16) + ((int)c3 << 8) + c4;
 }
 
-void read_Mnist_Image(std::string filename, std::vector<std::vector<double> > &vec)
+void read_Mnist_Image(std::string filename, std::vector<std::vector<unsigned int> > &vec)
 {
 	std::ifstream file(filename, std::ios::binary);
 	if (file.is_open())
@@ -34,14 +34,14 @@ void read_Mnist_Image(std::string filename, std::vector<std::vector<double> > &v
 
 		for (int i = 0; i < number_of_images; ++i)
 		{
-			std::vector<double> tp;
+			std::vector<unsigned int> tp;
 			for (int r = 0; r < n_rows; ++r)
 			{
 				for (int c = 0; c < n_cols; ++c)
 				{
 					unsigned char temp = 0;
 					file.read((char*)&temp, sizeof(temp));
-					tp.push_back((double)temp);
+					tp.push_back((unsigned int)temp);
 				}
 			}
 			vec.push_back(tp);
@@ -51,7 +51,7 @@ void read_Mnist_Image(std::string filename, std::vector<std::vector<double> > &v
 		std::cout << "unable to open file" << std::endl;
 }
 
-void read_Mnist_Label(std::string filename, std::vector<double> &vec)
+void read_Mnist_Label(std::string filename, std::vector<unsigned int> &vec)
 {
 	std::ifstream file (filename);
     if (file.is_open())
@@ -70,10 +70,9 @@ void read_Mnist_Label(std::string filename, std::vector<double> &vec)
         for(int i = 0; i < number_of_images; ++i)
 
         {
-			double tp = 0;
             unsigned char temp = 0;
             file.read((char*) &temp, sizeof(temp));
-			vec.push_back((double)temp);
+			vec.push_back((unsigned int)temp);
         }
 		file.close();
     }
