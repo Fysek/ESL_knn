@@ -1,6 +1,5 @@
 #include "MNISTdatabase.h"
 
-
 std::vector<std::vector<unsigned int>> distance(
 	std::vector<std::vector<unsigned int>> &vec_images_test,
 	std::vector<std::vector<unsigned int>> &vec_images_train
@@ -19,12 +18,12 @@ std::vector<std::vector<unsigned int>> distance(
 		unsigned int temp;
 		unsigned int sum = 0;
 
-		for (int a = 0;a < vec_images_train.size();a++) {
+		for (int a = 0;a < 500;a++) {
 			for (int j = 0; j < 28;j++)//rows
 			{
 				for (int k = 0; k < 28;k++)//columns
 				{
-					temp = (vec_images_test[i][j*k] - vec_images_train[a][j*k])^2;
+					temp = pow(vec_images_test[i][j*k] - vec_images_train[a][j*k],2);
 					sum = temp + sum;  // zsumowanie 
 				}
 			}
@@ -32,17 +31,17 @@ std::vector<std::vector<unsigned int>> distance(
 			tp.push_back(sum);
 		}
 		vec_dist.push_back(tp);//wrzuc wektor 60k 10k razy
-	}
+	} 
 	return vec_dist;
 }
 
 std::vector <unsigned int> assign_label(
 	std::vector<unsigned int> &vec_label_train,
-	std::vector<std::vector <unsigned int>> &vec_dist
+	std::vector<std::vector<unsigned int>> &vec_dist
 	)
 {
 	//assign the label using knn, vec contains assigned labels for 10k test images
-	std::vector <unsigned int> assigned_labels_vec;
+	std::vector<unsigned int> vec_assigned_labels;
 	read_Mnist_Label(filename_label_train, vec_label_train);
 	unsigned int temp;
 	//mam labele, mam dystanse
@@ -50,15 +49,15 @@ std::vector <unsigned int> assign_label(
 	//i przyporzdkowywujemy 
 	int k = 7;
 	for (int i = 0;i < 10000;i++) {
-		temp = classify_label(vec_dist,k);
-		assigned_labels_vec.push_back(temp);
+		temp = classify_label(vec_label_train,vec_dist,k);
+		vec_assigned_labels.push_back(temp);
 	}
-	return assigned_labels_vec;
+	return vec_assigned_labels;
 }
 
 float compare(
 	std::vector<unsigned int> &vec_label_test,
-	std::vector <unsigned int> &assigned_labels_vec
+	std::vector<unsigned int> &assigned_labels_vec
 	)
 {
 	//compare assigned label with the provided one

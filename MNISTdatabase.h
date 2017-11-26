@@ -1,6 +1,9 @@
 #include <cstdlib>
 #include <string>
+#include <math.h>
 #include "MNISTread.h"
+#include "KNNfunctions.h"
+
 
 const std::string filename_images_test = "C:/t10k-images-idx3-ubyte";
 const std::string filename_label_test = "C:/t10k-labels-idx1-ubyte";

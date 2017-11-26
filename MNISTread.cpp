@@ -46,6 +46,7 @@ void read_Mnist_Image(std::string filename, std::vector<std::vector<unsigned int
 			}
 			vec.push_back(tp);
 		}
+		file.close();
 	}
 	else
 		std::cout << "unable to open file" << std::endl;
