@@ -1,33 +1,47 @@
 #include "MNISTdatabase.h"
 
-std::vector<std::vector<unsigned int> > vec_images_test;
-std::vector<std::vector<unsigned int> > vec_images_train;
-std::vector<unsigned int> vec_label_test;
-std::vector<unsigned int> vec_label_train;
 
-void distance(std::vector<std::vector <unsigned int>> &vec_dist) {//vector vec [10k][60k] for 10k vector 60k distances
-	//include data
+std::vector<std::vector<unsigned int>> distance(
+	std::vector<std::vector<unsigned int>> &vec_images_test,
+	std::vector<std::vector<unsigned int>> &vec_images_train
+	) 
+{
+	std::vector<std::vector<unsigned int>> vec_dist;
+	
+	//vector vec [10k][60k] for 10k vector 60k distances
+																													   //include data
 	read_Mnist_Image(filename_images_test, vec_images_test);
 	read_Mnist_Image(filename_images_train, vec_images_train);
 	//calculate the distance between 10k test and 60k train
 	for (int i = 0; i < vec_images_test.size(); ++i)
 	{
-		std::vector<unsigned int> tp;
+		std::vector<unsigned int> tp;//ten wektor musi miec 60k size, 60 dystansow dla jednego obrazku
 		unsigned int temp;
+		unsigned int sum = 0;
 
-		for (int j = 0; j < 28 ; j++ )//rows
-		{
-			for (int k = 0; k < 28 ;k++)//columns
+		for (int a = 0;a < vec_images_train.size();a++) {
+			for (int j = 0; j < 28;j++)//rows
 			{
-
+				for (int k = 0; k < 28;k++)//columns
+				{
+					temp = (vec_images_test[i][j*k] - vec_images_train[a][j*k])^2;
+					sum = temp + sum;  // zsumowanie 
+				}
 			}
+			sum = sqrt(sum);
+			tp.push_back(sum);
 		}
-		//sqrt()
-		vec_dist.push_back(tp);
+		vec_dist.push_back(tp);//wrzuc wektor 60k 10k razy
 	}
+	return vec_dist;
 }
 
-std::vector <unsigned int> assign_label(std::vector<std::vector <unsigned int>> &vec_dist){//assign the label using knn, vec contains assigned labels for 10k test images
+std::vector <unsigned int> assign_label(
+	std::vector<unsigned int> &vec_label_train,
+	std::vector<std::vector <unsigned int>> &vec_dist
+	)
+{
+	//assign the label using knn, vec contains assigned labels for 10k test images
 	std::vector <unsigned int> assigned_labels_vec;
 	read_Mnist_Label(filename_label_train, vec_label_train);
 	for (;;) {}
@@ -35,10 +49,16 @@ std::vector <unsigned int> assign_label(std::vector<std::vector <unsigned int>> 
 	return assigned_labels_vec;
 }
 
-float compare(std::vector <unsigned int> &assigned_labels_vec){//compare assigned label with the provided one
+float compare(
+	std::vector<unsigned int> &vec_label_test,
+	std::vector <unsigned int> &assigned_labels_vec
+	)
+{
+	//compare assigned label with the provided one
 	int valid_value = 0;
 	float efficiency = 0;
 	read_Mnist_Label(filename_label_test, vec_label_test);
+
 	for (int i=0; i < assigned_labels_vec.size();i++) {
 		if (assigned_labels_vec[i] = vec_label_test[i])
 			valid_value++;
