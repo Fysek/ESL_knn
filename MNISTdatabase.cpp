@@ -12,24 +12,22 @@ std::vector<std::vector<unsigned int>> distance(
 	read_Mnist_Image(filename_images_test, vec_images_test);
 	read_Mnist_Image(filename_images_train, vec_images_train);
 	//calculate the distance between 10k test and 60k train
-	for (int i = 0; i < vec_images_test.size(); ++i)
+	for (std::vector<std::vector<unsigned int>>::iterator i = vec_images_test.begin(); i != vec_images_test.end(); ++i)
 	{
+		
 		std::vector<unsigned int> tp;//ten wektor musi miec 60k size, 60 dystansow dla jednego obrazku
-		unsigned int temp;
-		unsigned int sum = 0;
+		unsigned int temp, sum = 0;
 
-		for (int a = 0;a < 500;a++) {
-			for (int j = 0; j < 28;j++)//rows
-			{
-				for (int k = 0; k < 28;k++)//columns
-				{
-					temp = pow(vec_images_test[i][j*k] - vec_images_train[a][j*k],2);
-					sum = temp + sum;  // zsumowanie 
+		for (std::vector<std::vector<unsigned int>>::iterator a = vec_images_train.begin();a!= vec_images_train.end();a++) {
+			std::vector<unsigned int> ::iterator t10k_i = i->begin();
+			for (std::vector<unsigned int>::iterator train_i = a->begin(); train_i != a->end(); ++train_i) {
+				temp = pow( *t10k_i - *train_i, 2);
+				sum = temp + sum;  // zsumowanie 
+				t10k_i++;
 				}
-			}
 			sum = sqrt(sum);
 			tp.push_back(sum);
-		}
+			}
 		vec_dist.push_back(tp);//wrzuc wektor 60k 10k razy
 	} 
 	return vec_dist;
