@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#define TEST_SIZE 10000
+#define TRAIN_SIZE 60000
 
 
 
