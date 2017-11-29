@@ -26,26 +26,25 @@ void distance(
 	} 
 }
 
-void assign_label(
+void assign_label(//todo
 	unsigned int tab_train_label[TRAIN_SIZE],
 	unsigned int tab_distance[TEST_SIZE][TRAIN_SIZE],
 	unsigned int tab_assigned_labels[TEST_SIZE],
-	int k
 	)
 {
-	//assign the label using knn, vec contains assigned labels for 10k test images
 	read_Mnist_Label_Train(filename_label_train, tab_train_label);
 	unsigned int tab_assigned_labels[TEST_SIZE];
-	unsigned int temp;
-	//int k = 7;
+	unsigned int tab_small[TEST_SIZE][KNN];
+	unsigned int small[KNN];
 	
-	//mam labele, mam dystanse
-	//k najblizszych sprawdzamy
-	//i przyporzdkowywujemy 
-	
-	for (int i = 0;i < 10000;i++) {
-		//temp = classify_label(vec_label_train,vec_dist,k);
-		//vec_assigned_labels.push_back(temp);
+	for (int i = 0;i < TEST_SIZE;i++) {
+		for (int kkn = 0; knn < KNN; knn++){
+			small[knn] = tab_distance[i][0]; 			//init with the first value
+			for(int j = 0; j < TRAIN_SIZE;j++){
+				if(tab_distance[i][j] < small[knn])
+					small[knn] = tab_distance[i][j];
+			}	
+		}
 	}
 }
 
@@ -57,13 +56,13 @@ float compare(
 	//compare assigned label with the provided one
 	int valid_value = 0;
 	float efficiency = 0;
-	read_Mnist_Label_Test(filename_label_test, vec_label_test);
+	read_Mnist_Label_Test(filename_label_test, tab_test_label);
 
-	for (int i=0; i < assigned_labels_vec.size();i++) {
-		if (assigned_labels_vec[i] = vec_label_test[i])
+	for (int i=0; i < TEST_SIZE;i++) {
+		if (tab_assigned_labels[i] = tab_test_label[i])
 			valid_value++;
 	}
-	efficiency = valid_value/assigned_labels_vec.size();
+	efficiency = valid_value/TEST_SIZE;
 	return efficiency;
 }
 
