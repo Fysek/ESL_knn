@@ -10,17 +10,20 @@ const std::string filename_label_test = "C:/t10k-labels-idx1-ubyte";
 const std::string filename_images_train = "C:/train-images-idx3-ubyte";
 const std::string filename_label_train = "C:/train-labels-idx1-ubyte";
 
-std::vector<std::vector<unsigned int>> distance(
-	std::vector<std::vector<unsigned int>> &vec_images_test,
-	std::vector<std::vector<unsigned int>> &vec_images_train
+void distance(
+	unsigned int tab_test[TEST_SIZE][PIXEL_SIZE],
+	unsigned int tab_train[TRAIN_SIZE][PIXEL_SIZE],
+	unsigned int tab_dist[TRAIN_SIZE][PIXEL_SIZE]
 	);
 
-std::vector <unsigned int> assign_label(
-	std::vector<unsigned int> &vec_label_train,
-	std::vector<std::vector <unsigned int>> &vec_dist
+void assign_label(
+	unsigned int tab_train_label[TRAIN_SIZE],
+	unsigned int tab_distance[TEST_SIZE][TRAIN_SIZE],
+	unsigned int tab_assigned_labels[TEST_SIZE],
+	int k
 	);
 
 float compare(
-	std::vector<unsigned int> &vec_label_test,
-	std::vector <unsigned int> &assigned_labels_vec
+	unsigned int tab_test_label[TEST_SIZE],
+	unsigned int tab_assigned_labels[TEST_SIZE]
 	);
