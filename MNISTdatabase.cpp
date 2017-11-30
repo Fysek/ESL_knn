@@ -1,5 +1,27 @@
 #include "MNISTdatabase.h"
 
+void classify_label( unsigned int tab_small[TEST_SIZE][KNN])//to do
+{	
+	unsigned int small[KNN];
+	
+	
+	for (int i = 0;i < TEST_SIZE;i++) {
+		for (int kkn = 0; knn < KNN; knn++){
+			small[knn] = tab_distance[i][0]; 			//init with the first value
+			for(int j = 0; j < TRAIN_SIZE;j++){
+				
+				
+
+			}	
+		}
+	}
+	
+	
+}
+
+
+
+
 void distance(
 	unsigned int tab_test[TEST_SIZE][PIXEL_SIZE],
 	unsigned int tab_train[TRAIN_SIZE][PIXEL_SIZE]
@@ -41,6 +63,9 @@ void assign_label(//todo
 		for (int kkn = 0; knn < KNN; knn++){
 			small[knn] = tab_distance[i][0]; 			//init with the first value
 			for(int j = 0; j < TRAIN_SIZE;j++){
+				
+				
+				
 				if(tab_distance[i][j] < small[knn])
 					small[knn] = tab_distance[i][j];
 			}	
