@@ -12,7 +12,7 @@ int ReverseInt(int i)
 	return ((int)c1 << 24) + ((int)c2 << 16) + ((int)c3 << 8) + c4;
 }
 
-void read_Mnist_Image_Train(std::string filename, unsigned int tab[TRAIN_SIZE][PIXEL_SIZE])
+void read_Mnist_Image_Train(std::string filename, unsigned int** tab)
 {
 	std::ifstream file(filename, std::ios::binary);
 	if (file.is_open())
@@ -33,13 +33,10 @@ void read_Mnist_Image_Train(std::string filename, unsigned int tab[TRAIN_SIZE][P
 
 		for (int i = 0; i < number_of_images; ++i)
 		{
-			for (int r = 0; r < n_rows; ++r)
+			for (int j = 0; j < n_rows * n_cols; ++j)
 			{
-				for (int c = 0; c < n_cols; ++c)
-				{
-					file.read((char*)&temp, sizeof(temp));
-					tab[i][r*c] = (unsigned int)temp;
-				}
+				file.read((char*)&temp, sizeof(temp));
+				tab[i][j] = (unsigned int)temp;
 			}
 		}
 		file.close();
@@ -48,7 +45,7 @@ void read_Mnist_Image_Train(std::string filename, unsigned int tab[TRAIN_SIZE][P
 		std::cout << "unable to open file" << std::endl;
 }
 
-void read_Mnist_Image_Test(std::string filename, unsigned int tab[TEST_SIZE][PIXEL_SIZE])
+void read_Mnist_Image_Test(std::string filename, unsigned int** tab)
 {
 	std::ifstream file(filename, std::ios::binary);
 	if (file.is_open())
@@ -69,13 +66,10 @@ void read_Mnist_Image_Test(std::string filename, unsigned int tab[TEST_SIZE][PIX
 
 		for (int i = 0; i < number_of_images; ++i)
 		{
-			for (int r = 0; r < n_rows; ++r)
+			for (int j = 0; j < n_rows * n_cols; ++j)
 			{
-				for (int c = 0; c < n_cols; ++c)
-				{
-					file.read((char*)&temp, sizeof(temp));
-					tab[i][r*c] = (unsigned int)temp;
-				}
+				file.read((char*)&temp, sizeof(temp));
+				tab[i][j] = (unsigned int)temp;
 			}
 		}
 		file.close();
@@ -85,7 +79,7 @@ void read_Mnist_Image_Test(std::string filename, unsigned int tab[TEST_SIZE][PIX
 }
 
 
-void read_Mnist_Label_Train(std::string filename, unsigned int tab[TRAIN_SIZE])
+void read_Mnist_Label_Train(std::string filename, unsigned int* tab)
 {
 	std::ifstream file (filename);
     if (file.is_open())
@@ -113,7 +107,7 @@ void read_Mnist_Label_Train(std::string filename, unsigned int tab[TRAIN_SIZE])
 }
 
 
-void read_Mnist_Label_Test(std::string filename, unsigned int tab[TEST_SIZE])
+void read_Mnist_Label_Test(std::string filename, unsigned int* tab)
 {
 	std::ifstream file(filename);
 	if (file.is_open())

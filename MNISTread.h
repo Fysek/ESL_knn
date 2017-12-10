@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#define TEST_SIZE 10000
-#define TRAIN_SIZE 60000
+#define TEST_SIZE 100
+#define TRAIN_SIZE 600
 #define PIXEL_SIZE 784
 
 
@@ -25,8 +25,8 @@ struct trainImage {
 
 
 int ReverseInt(int i);
-void read_Mnist_Image_Train(std::string filename, unsigned int tab[TRAIN_SIZE][PIXEL_SIZE]);
-void read_Mnist_Image_Test(std::string filename, unsigned int tab[TEST_SIZE][PIXEL_SIZE]);
-void read_Mnist_Label_Train(std::string filename, unsigned int tab[TRAIN_SIZE]);
-void read_Mnist_Label_Test(std::string filename, unsigned int tab[TEST_SIZE]);
+void read_Mnist_Image_Train(std::string filename, unsigned int** tab);
+void read_Mnist_Image_Test(std::string filename, unsigned int** tab);
+void read_Mnist_Label_Train(std::string filename, unsigned int* tab);
+void read_Mnist_Label_Test(std::string filename, unsigned int* tab);
 

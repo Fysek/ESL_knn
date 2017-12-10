@@ -2,7 +2,6 @@
 #include <string>
 #include <math.h>
 #include "MNISTread.h"
-#include "KNNfunctions.h"
 #define KNN 7
 
 const std::string filename_images_test = "C:/t10k-images-idx3-ubyte";
@@ -11,18 +10,18 @@ const std::string filename_images_train = "C:/train-images-idx3-ubyte";
 const std::string filename_label_train = "C:/train-labels-idx1-ubyte";
 
 void distance(
-	unsigned int tab_test[TEST_SIZE][PIXEL_SIZE],
-	unsigned int tab_train[TRAIN_SIZE][PIXEL_SIZE],
-	unsigned int tab_dist[TRAIN_SIZE][PIXEL_SIZE]
+	unsigned int** tab_test,
+	unsigned int** tab_train,
+	unsigned int** tab_dist
 	);
 
 void assign_label(
-	unsigned int tab_train_label[TRAIN_SIZE],
-	unsigned int tab_distance[TEST_SIZE][TRAIN_SIZE],
-	unsigned int tab_assigned_labels[TEST_SIZE],
+	unsigned int* tab_train_label,
+	unsigned int** tab_distance,
+	unsigned int* tab_assigned_labels
 	);
 
 float compare(
-	unsigned int tab_test_label[TEST_SIZE],
-	unsigned int tab_assigned_labels[TEST_SIZE]
+	unsigned int* tab_test_label,
+	unsigned int* tab_assigned_labels
 	);
