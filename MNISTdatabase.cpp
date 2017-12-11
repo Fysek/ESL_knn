@@ -1,23 +1,6 @@
 #include "MNISTdatabase.h"
 
-//d classify_label( unsigned int tab_small[TEST_SIZE][KNN])//to do
-//
-//unsigned int small[KNN];
-//
-//
-//for (int i = 0;i < TEST_SIZE;i++) {
-//	for (int knn = 0; knn < KNN; knn++){
-//		small[knn] = tab_distance[i][0]; 			//init with the first value
-//		for(int j = 0; j < TRAIN_SIZE;j++){
-//			
-//			
-//
-//		}	
-//	}
-//}
-//
-//
-//
+
 
  
  
@@ -57,6 +40,7 @@ void distance(
 void assign_label(//todo
 	unsigned int* tab_train_label,
 	unsigned int** tab_distance,
+	unsigned int** tab_train_label_dist,
 	unsigned int* tab_assigned_labels
 	)
 {
@@ -66,6 +50,13 @@ void assign_label(//todo
 	int zamiana;
 	int schowek_label;
 	int schowek;
+	int temp_label = 0;
+	int temp_freq = 0;
+	int freq[TEN];
+	
+	for(int a = 0;a < TEN;a++){
+		freq[a] = 0;
+	} 
 	//unsigned int tab_small_dist[TEST_SIZE][KNN];//smallest distances
 	//unsigned int tab_small_label[TEST_SIZE][KNN];// labels for distances
 	
@@ -85,18 +76,64 @@ void assign_label(//todo
 
 					tab_distance[i][j] = tab_distance[i][j + 1];	//t[i] przyjmuje wartoœæ nastêpnego elementu, gdy¿ jest on mniejszy
 					tab_train_label[j] = tab_train_label[j + 1];
+					
 
 					tab_distance[i][j + 1] = schowek;				//kolejny element tablicy przejmuje wczeœniejsz¹ wartoœæ poprzedniego elementu, gdy¿ jest on wiêkszy
 					tab_train_label[j + 1] = schowek_label;
 				}
+				tab_train_label_dist[i][j] = tab_train_label[j];
+				
 			}
 		} while (zamiana != 0);
 	}
 	/*sortowanie end*/
 
+	/*klasyfikacja*/
 
-
-
+	for (int i = 0;i < TEST_SIZE;i++){
+		for (int knn = 0; knn < KNN; knn++){
+			switch(tab_train_label_dist[i][knn]){
+			case 0:
+				freq[0]++;
+				break;
+			case 1:
+				freq[1]++;
+				break;
+			case 2:
+				freq[2]++;
+				break;
+			case 3:
+				freq[3]++;
+				break;
+			case 4:
+				freq[4]++;
+				break;
+			case 5:
+				freq[5]++;
+				break;			
+			case 6:
+				freq[6]++;
+				break;
+			case 7:
+				freq[7]++;
+				break;			
+			case 8:
+				freq[8]++;
+				break;
+			case 9:
+				freq[9]++;
+				break;
+			}
+		}
+		for(int i =0; i<TEN;i++){
+			if(freq[i] > temp_freq){
+				temp_freq = freq[i];
+				temp_label = i;
+			}
+			
+		}
+		tab_assigned_labels[i] = temp_label;	
+	}
 
 }
 

@@ -17,6 +17,11 @@ int main()
 	for (int k = 0; k < TEST_SIZE; ++k) {
 		tab_dist[k] = new unsigned int[TRAIN_SIZE];
 	}
+	
+	unsigned int** tab_train_label_dist = new unsigned int*[TEST_SIZE];
+	for (int k = 0; k < TEST_SIZE; ++k) {
+		tab_train_label_dist[k] = new unsigned int[TRAIN_SIZE];
+	}
 
 	unsigned int* tab_train_label = new unsigned int[TRAIN_SIZE];
 	
@@ -27,7 +32,7 @@ int main()
 	float eff = 0;
 
 	distance(tab_test_image, tab_train_image, tab_dist);
-	assign_label(tab_train_label, tab_dist, tab_assigned_labels);
+	assign_label(tab_train_label, tab_dist, tab_train_label_dist, tab_assigned_labels);
 
 	//
 	//for (int i = 0; i < 5; ++i) {
@@ -56,6 +61,11 @@ int main()
 		delete [] tab_dist[i];
 	}
 	delete [] tab_dist;
+	
+	for(int i = 0; i < TEST_SIZE; ++i) {
+		delete [] tab_train_label_dist[i];
+	}
+	delete [] tab_train_label_dist;
 	
 	delete [] tab_train_label;
 	delete [] tab_test_label;
