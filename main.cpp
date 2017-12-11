@@ -3,6 +3,7 @@
 
 int main()
 {
+	/*variables*/
 	unsigned int** tab_test_image = new unsigned int*[TEST_SIZE];
 	for (int i = 0; i < TEST_SIZE; ++i) {
 		tab_test_image[i] = new unsigned int[PIXEL_SIZE];
@@ -31,13 +32,13 @@ int main()
 
 	float eff = 0;
 
+	/*functions*/
 	distance(tab_test_image, tab_train_image, tab_dist);
 	assign_label(tab_train_label, tab_dist, tab_train_label_dist, tab_assigned_labels);
 	eff = compare(tab_test_label, tab_assigned_labels);
 	std::cout << "efficiency: " << eff << "%"<<std::endl;
 
-
-	//cleaning
+	/*cleaning*/
 	for(int i = 0; i < TEST_SIZE; ++i) {
 		delete [] tab_test_image[i];
 	}

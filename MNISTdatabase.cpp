@@ -1,29 +1,21 @@
 #include "MNISTdatabase.h"
 
-void zero_table(unsigned int tab[KNN]) {
-	for (int i = 0; i < KNN; i++) {
-		tab[i] = 0;
-	}
-}
- 
 void distance(
 	unsigned int** tab_test,
 	unsigned int** tab_train,
 	unsigned int** tab_dist
 	) 
 { 
-	//vector vec [10k][60k] for 10k vector 60k distances
-	//include data
 	read_Mnist_Image_Test(filename_images_test, tab_test);
 	read_Mnist_Image_Train(filename_images_train, tab_train);
-	//calculate the distance between 10k test and 60k train
+
 	unsigned int temp, sum = 0;
 
 	for (int i = 0; i < TEST_SIZE; ++i){
 		for (int j = 0; j < TRAIN_SIZE;j++) {
 			for (int rc = 0;rc < PIXEL_SIZE;rc++) {
 				temp = pow(tab_test[i][rc] - tab_train[j][rc],2);
-				sum = temp + sum;  // zsumowanie 
+				sum = temp + sum; 
 			}
 			sum = sqrt(sum);
 			tab_dist[i][j] = sum;
@@ -32,8 +24,7 @@ void distance(
 }
 
 
-
-void assign_label(//todo
+void assign_label(
 	unsigned int* tab_train_label,
 	unsigned int** tab_distance,
 	unsigned int** tab_train_label_dist,
@@ -48,25 +39,26 @@ void assign_label(//todo
 	int freq[TEN];
 
 	read_Mnist_Label_Train(filename_label_train, tab_train_label);
-	/*sortowanie start*/
-	for (int i = 0;i < TEST_SIZE;i++) {//dla 10000 labeli
+
+	/*sortowanie*/
+	for (int i = 0;i < TEST_SIZE;i++) {
 		do
 		{
-			zamiana = 0;//przed ka¿dym "przejazdem" pêtli for zmienna zamiana jest zerowana
+			zamiana = 0;
 			for (int j = 0; j < TRAIN_SIZE-1; j++)
 			{
-				if (tab_distance[i][j] > tab_distance[i][j+1])// jeœli element tablicy jest wiêkszy od nastêpnego elementu
+				if (tab_distance[i][j] > tab_distance[i][j+1])
 				{
-					zamiana = zamiana + 1;						//jeœli jest jakaœ zmiana, to zmienne zamiana powiêksza swoj¹ wartoœæ
+					zamiana = zamiana + 1;						
 
-					schowek = tab_distance[i][j];				//wartoœæ t[i] jest kopiowana do schowka
+					schowek = tab_distance[i][j];				
 					schowek_label = tab_train_label[j];
 
-					tab_distance[i][j] = tab_distance[i][j + 1];	//t[i] przyjmuje wartoœæ nastêpnego elementu, gdy¿ jest on mniejszy
+					tab_distance[i][j] = tab_distance[i][j + 1];	
 					tab_train_label[j] = tab_train_label[j + 1];
 					
 
-					tab_distance[i][j + 1] = schowek;				//kolejny element tablicy przejmuje wczeœniejsz¹ wartoœæ poprzedniego elementu, gdy¿ jest on wiêkszy
+					tab_distance[i][j + 1] = schowek;				
 					tab_train_label[j + 1] = schowek_label;
 				}
 				tab_train_label_dist[i][j] = tab_train_label[j];
@@ -74,7 +66,6 @@ void assign_label(//todo
 			}
 		} while (zamiana != 0);
 	}
-	/*sortowanie end*/
 
 	/*klasyfikacja*/
 	for (int i = 0;i < TEST_SIZE;i++){
