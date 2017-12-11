@@ -1,9 +1,5 @@
 #include "MNISTdatabase.h"
 
-
-
- 
- 
 void zero_table(unsigned int tab[KNN]) {
 	for (int i = 0; i < KNN; i++) {
 		tab[i] = 0;
@@ -44,22 +40,14 @@ void assign_label(//todo
 	unsigned int* tab_assigned_labels
 	)
 {
-	read_Mnist_Label_Train(filename_label_train, tab_train_label);
-	
-	//unsigned int tab_assigned_labels[TEST_SIZE];
 	int zamiana;
 	int schowek_label;
 	int schowek;
 	int temp_label = 0;
 	int temp_freq = 0;
 	int freq[TEN];
-	
-	for(int a = 0;a < TEN;a++){
-		freq[a] = 0;
-	} 
-	//unsigned int tab_small_dist[TEST_SIZE][KNN];//smallest distances
-	//unsigned int tab_small_label[TEST_SIZE][KNN];// labels for distances
-	
+
+	read_Mnist_Label_Train(filename_label_train, tab_train_label);
 	/*sortowanie start*/
 	for (int i = 0;i < TEST_SIZE;i++) {//dla 10000 labeli
 		do
@@ -89,8 +77,10 @@ void assign_label(//todo
 	/*sortowanie end*/
 
 	/*klasyfikacja*/
-
 	for (int i = 0;i < TEST_SIZE;i++){
+		for (int a = 0;a < TEN;a++) {
+			freq[a] = 0;
+		}
 		for (int knn = 0; knn < KNN; knn++){
 			switch(tab_train_label_dist[i][knn]){
 			case 0:
@@ -125,7 +115,7 @@ void assign_label(//todo
 				break;
 			}
 		}
-		for(int i =0; i<TEN;i++){
+		for(int i = 0; i < TEN; i++){
 			if(freq[i] > temp_freq){
 				temp_freq = freq[i];
 				temp_label = i;
@@ -142,8 +132,7 @@ float compare(
 	unsigned int* tab_assigned_labels
 	)
 {
-	//compare assigned label with the provided one
-	int valid_value = 0;
+	float valid_value = 0;
 	float efficiency = 0;
 	read_Mnist_Label_Test(filename_label_test, tab_test_label);
 
@@ -151,7 +140,7 @@ float compare(
 		if (tab_assigned_labels[i] = tab_test_label[i])
 			valid_value++;
 	}
-	efficiency = valid_value/TEST_SIZE;
+	efficiency = (valid_value*100)/TEST_SIZE;
 	return efficiency;
 }
 

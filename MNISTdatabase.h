@@ -19,8 +19,9 @@ void distance(
 void assign_label(
 	unsigned int* tab_train_label,
 	unsigned int** tab_distance,
+	unsigned int** tab_train_label_dist,
 	unsigned int* tab_assigned_labels
-	);
+);
 
 float compare(
 	unsigned int* tab_test_label,

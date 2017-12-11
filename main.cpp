@@ -33,20 +33,11 @@ int main()
 
 	distance(tab_test_image, tab_train_image, tab_dist);
 	assign_label(tab_train_label, tab_dist, tab_train_label_dist, tab_assigned_labels);
+	eff = compare(tab_test_label, tab_assigned_labels);
+	std::cout << "efficiency: " << eff << "%"<<std::endl;
 
-	//
-	//for (int i = 0; i < 5; ++i) {
-	//	for (int j = 0; j <10; ++j) {
-	//		std::cout << tab_dist[i][j] << std::endl;
-	//	}
-	//	std::cout << "next"<< std::endl;
-	//}
 
-	//read_Mnist_Image(filename_images_train, vec_images_train);
-	//vec_assigned_labels = assign_label(vec_label_train, vec_distance);
-	//eff = compare(vec_label_test, vec_assigned_labels);
-
-	//deletion of arrays
+	//cleaning
 	for(int i = 0; i < TEST_SIZE; ++i) {
 		delete [] tab_test_image[i];
 	}

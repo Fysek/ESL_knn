@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#define TEST_SIZE 100
-#define TRAIN_SIZE 600
+#define TEST_SIZE 1000
+#define TRAIN_SIZE 5000
 #define PIXEL_SIZE 784
 
 
