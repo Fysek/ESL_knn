@@ -69,12 +69,12 @@ void assign_label(//todo
 	//unsigned int tab_small_dist[TEST_SIZE][KNN];//smallest distances
 	//unsigned int tab_small_label[TEST_SIZE][KNN];// labels for distances
 	
-	
+	/*sortowanie start*/
 	for (int i = 0;i < TEST_SIZE;i++) {//dla 10000 labeli
 		do
 		{
 			zamiana = 0;//przed ka¿dym "przejazdem" pêtli for zmienna zamiana jest zerowana
-			for (int j = 0; j < TRAIN_SIZE+1; j++)
+			for (int j = 0; j < TRAIN_SIZE-1; j++)
 			{
 				if (tab_distance[i][j] > tab_distance[i][j+1])// jeœli element tablicy jest wiêkszy od nastêpnego elementu
 				{
@@ -92,6 +92,9 @@ void assign_label(//todo
 			}
 		} while (zamiana != 0);
 	}
+	/*sortowanie end*/
+
+
 
 
 
