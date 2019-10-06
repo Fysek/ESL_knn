@@ -1,5 +1,20 @@
+/**
+ *===========================================================================
+ * Copyright 2019 Mateusz Dyrdół. All rights reserved.
+ *===========================================================================
+ */
 #include "MNISTread.h"
 
+/**
+ * Reverse integer.
+ *
+ * This function is reversing integer.
+ * All integers in the files are stored in the MSB first (high endian) format thus integers must be reverse.
+ * Users of Intel processors and other low-endian machines must flip the bytes of the header. 
+ *
+ * @param i - integer to reverse
+ * @return int reversed integer
+ */
 int ReverseInt(int i)
 {
 	unsigned char c1, c2, c3, c4;
@@ -12,6 +27,15 @@ int ReverseInt(int i)
 	return ((int)c1 << 24) + ((int)c2 << 16) + ((int)c3 << 8) + c4;
 }
 
+/**
+ * Read MNIST train images to two dimension table
+ *
+ * This function takes MNIST images as a file 
+ *
+ * @param filename - path to file with train images
+ * @param tab_train - double pointer to array with train images
+ * @return void
+ */
 void read_Mnist_Image_Train(std::string filename, unsigned int** tab_train)
 {
 	std::ifstream file(filename, std::ios::binary);
@@ -45,6 +69,15 @@ void read_Mnist_Image_Train(std::string filename, unsigned int** tab_train)
 		std::cout << "unable to open file" << std::endl;
 }
 
+/**
+ * Read MNIST test images to two dimension table
+ *
+ * This function takes MNIST images as a file 
+ *
+ * @param filename - path to file with test images
+ * @param tab_test - double pointer to array with test images
+ * @return void
+ */
 void read_Mnist_Image_Test(std::string filename, unsigned int** tab_test)
 {
 	std::ifstream file(filename, std::ios::binary);
@@ -78,7 +111,15 @@ void read_Mnist_Image_Test(std::string filename, unsigned int** tab_test)
 		std::cout << "unable to open file" << std::endl;
 }
 
-
+/**
+ * Read MNIST train labels to two dimension table
+ *
+ * This function takes MNIST images as a file 
+ *
+ * @param filename - path to file with train labels
+ * @param tab_train_label - pointer to table with train labels
+ * @return void
+ */
 void read_Mnist_Label_Train(std::string filename, unsigned int* tab_train_label)
 {
 	std::ifstream file (filename);
@@ -106,7 +147,15 @@ void read_Mnist_Label_Train(std::string filename, unsigned int* tab_train_label)
 		std::cout << "unable to open file" << std::endl;
 }
 
-
+/**
+ * Read MNIST test labels to two dimension table
+ *
+ * This function takes MNIST images as a file 
+ *
+ * @param filename - path to file with test labels
+ * @param tab_test_label - pointer to table with test labels
+ * @return void
+ */
 void read_Mnist_Label_Test(std::string filename, unsigned int* tab_test_label)
 {
 	std::ifstream file(filename);
@@ -133,6 +182,4 @@ void read_Mnist_Label_Test(std::string filename, unsigned int* tab_test_label)
 	else
 		std::cout << "unable to open file" << std::endl;
 }
-
-
 

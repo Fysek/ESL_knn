@@ -1,3 +1,24 @@
+/**
+ *===========================================================================
+ * Copyright 2019 Mateusz Dyrdół. All rights reserved.
+ *===========================================================================
+ *
+ * Main function
+ *
+ * This is the main function for k nearest neighbours algorithm to predict numbers in MNIST database of handwritten digits.
+ * MNIST dataset contains 60,000 training images and 10,000 testing images.
+ * Every image is a 28x28 pixel box in 8-bit grayscale.
+ * Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background (white), 255 means foreground (black).
+ *  
+ * Output is the efficiency of algorithm.
+ * Default k is set to 7
+ *
+ * Note: Please define TEST_SIZE and TRAIN_SIZE in MNISTread.h before executing 
+ * Note: Please define MNIST files paths in MNISTdatabe.h before executing
+ * More about MNIST: http://yann.lecun.com/exdb/mnist/
+ *
+ */
+
 #include "MNISTread.h"
 #include "MNISTdatabase.h"
 
