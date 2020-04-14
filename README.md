@@ -13,5 +13,6 @@ Default k is set to 7
 Note: Before execution, please specify paths to MNIST database in MNISTdatabase.h file.
 
 More about MNIST: http://yann.lecun.com/exdb/mnist/
+
 Copyright 2019 Mateusz Dyrdół. All rights reserved.
  
